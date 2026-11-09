@@ -1,0 +1,72 @@
+/**
+ * assets/site.css
+ *
+ * Purpose: shared look of the GitHub Pages site (download page and preparer): the same Ink/Paper
+ *          surfaces, brand gradient and mono labels as the post and the guide PDF, so whoever
+ *          arrives from the "comente GUIA" message recognises the piece. Geist stands in for
+ *          Aeonik (commercial font, not published here).
+ * Exports: tokens (:root), surfaces (.s-ink, .s-paper), .wrap, .top, .eyebrow, .gx, .lead,
+ *          .btn (.btn-primary, .btn-ghost), .meta, .site-footer.
+ * Shared:  index.html and preparar.html; page-specific rules stay in each page's <style>.
+ * Perf:    one small file, no framework; fonts from Google Fonts with display=swap.
+ */
+:root {
+  --ink: #121018; --ink-2: #1B1822; --paper: #F8F5E6; --card: #FFFDF7;
+  --t2: #45424D; --t3: #67636F; --on-ink-2: #C7C0CD; --rose: #E83972;
+  --grad: linear-gradient(95deg, #EF7843 0%, #EB5849 25%, #E83972 50%, #883F90 75%, #654193 100%);
+  --sans: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --wrap: 1120px; --gutter: 20px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; font-family: var(--sans); background: var(--ink); color: var(--paper); -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; }
+
+.s-ink { background: var(--ink); color: var(--paper); --fg: var(--paper); --muted: var(--on-ink-2); --line: rgba(248,245,230,.14); --chip: var(--ink-2); }
+.s-paper { background: var(--paper); color: var(--ink); --fg: var(--ink); --muted: var(--t3); --line: rgba(18,16,24,.13); --chip: var(--card); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .s-paper { background: #17141D; color: var(--paper); --fg: var(--paper); --muted: var(--on-ink-2); --line: rgba(248,245,230,.12); --chip: #201C27; }
+}
+:root[data-theme="dark"] .s-paper { background: #17141D; color: var(--paper); --fg: var(--paper); --muted: var(--on-ink-2); --line: rgba(248,245,230,.12); --chip: #201C27; }
+
+/* Ink with the soft brand glows and the fading dot grid of the post backgrounds. */
+.glow { position: relative; overflow: hidden; isolation: isolate;
+  background: radial-gradient(55% 45% at 90% 0%, rgba(232,57,114,.20), transparent 70%),
+              radial-gradient(50% 50% at 0% 100%, rgba(101,65,147,.28), transparent 70%), var(--ink); }
+.glow::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: radial-gradient(rgba(248,245,230,.12) 1px, transparent 1.2px); background-size: 22px 22px;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 75%); mask-image: linear-gradient(180deg, #000 0%, transparent 75%); }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; }
+.me { display: flex; align-items: center; gap: 12px; color: inherit; text-decoration: none; }
+.me img { width: 44px; height: 44px; border-radius: 50%; padding: 2px; background: var(--grad); display: block; }
+.me b { display: block; font-size: 16px; letter-spacing: -.01em; }
+.me span { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
+.top-link { font: 500 13px/1 var(--mono); color: var(--muted); text-decoration: none; padding: 10px 0; }
+.top-link:hover { color: var(--fg); }
+
+.eyebrow { display: inline-flex; align-items: center; padding: 8px 14px; border-radius: 999px;
+  font: 700 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--fg);
+  border: 1.5px solid transparent; background: linear-gradient(var(--chip), var(--chip)) padding-box, var(--grad) border-box; }
+.gx { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lead { font-size: clamp(18px, 2.3vw, 21px); line-height: 1.5; color: var(--muted); margin: 0; max-width: 60ch; text-wrap: pretty; }
+.lead b { color: var(--fg); font-weight: 600; }
+.meta { font: 500 13px/1.5 var(--mono); color: var(--muted); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 26px;
+  border-radius: 999px; font: 700 17px/1 var(--sans); text-decoration: none; cursor: pointer; border: 0; transition: transform .15s ease, filter .15s ease, border-color .15s ease; }
+.btn-primary { color: #fff; background: var(--grad); box-shadow: 0 14px 34px -12px rgba(232,57,114,.65); }
+.btn-primary:hover { filter: brightness(1.07); transform: translateY(-1px); }
+.btn-ghost { color: var(--fg); background: transparent; border: 1.5px solid var(--line); }
+.btn-ghost:hover { border-color: var(--fg); }
+.btn svg { width: 18px; height: 18px; flex: none; }
+:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; border-radius: 6px; }
+
+.site-footer { padding: 36px 0 44px; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.6; color: var(--muted); }
+.site-footer a { color: var(--fg); }
+.site-footer .row { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 10px; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
