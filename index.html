@@ -4,87 +4,284 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Time de SEO e GEO no seu chat · guia grátis</title>
-<meta name="description" content="Guia grátis em PDF: três especialistas no Claude ou no ChatGPT medem a página do seu produto, reescrevem para o Google e para os assistentes de IA e conferem cada fato. Testado em quatro lojas reais.">
+<meta name="description" content="Guia grátis em PDF: o Claude ou o ChatGPT viram um time de SEO e GEO que mede a página do seu produto, reescreve sem inventar nada e confere cada fato. Testado em quatro lojas reais.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Time de SEO e GEO no seu chat · guia grátis">
 <meta property="og:description" content="Anexe o PDF e a página do seu produto no Claude ou no ChatGPT. Testado em quatro lojas reais.">
 <meta property="og:image" content="https://fabiowill.github.io/time-de-seo-geo/og.png">
 <meta property="og:url" content="https://fabiowill.github.io/time-de-seo-geo/">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#121018">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23EF7843'/%3E%3Cstop offset='.5' stop-color='%23E83972'/%3E%3Cstop offset='1' stop-color='%23654193'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
 <!--
   index.html
 
-  Purpose: download page of the guide (GitHub Pages root): the PDF, the preparer and the code,
-           for people who arrive from the "comente GUIA" message and don't know GitHub.
+  Purpose: download page of the guide (GitHub Pages root). People arrive from the "comente GUIA"
+           message, mostly on the phone: show the guide itself, the real Stanley evidence and the
+           score jump, how to use it in four steps, and the consultancy contact.
   Exports: none (static page).
-  Shared:  same tokens and type as preparar.html; og.png is rendered from the post folder
-           (arte/post.html, page o1).
-  Perf:    static, no scripts.
+  Shared:  assets/site.css (with preparar.html); guide page images rendered from the post folder
+           (guia/render.mjs); og.png from arte/post.html page o1; store prints from casos/.
+  Perf:    static; one small script (copy button and the score bars when they scroll into view).
 -->
 <style>
-  :root { --ink: #121018; --paper: #F8F5E6; --muted: #67636F; --line: rgba(18,16,24,.14); --card: #FFFFFF;
-          --grad: linear-gradient(95deg, #EF7843 0%, #EB5849 25%, #E83972 50%, #883F90 75%, #654193 100%); }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ink: #F8F5E6; --paper: #121018; --muted: #C7C0CD; --line: rgba(248,245,230,.16); --card: #1B1822; } }
-  * { box-sizing: border-box; }
-  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--paper); color: var(--ink); }
-  main { max-width: 720px; margin: 0 auto; padding: 48px 16px 64px; }
-  .bar { height: 6px; border-radius: 3px; background: var(--grad); width: 72px; }
-  .eyebrow { margin-top: 22px; font: 700 13px/1 ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-  h1 { font-size: clamp(32px, 7vw, 52px); line-height: 1.03; letter-spacing: -.035em; margin: 12px 0 14px; }
-  p { font-size: 18px; line-height: 1.5; color: var(--muted); margin: 0 0 12px; }
-  p b { color: var(--ink); }
-  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 8px; }
-  a.btn { display: inline-block; text-decoration: none; font-size: 18px; font-weight: 700; border-radius: 999px; padding: 15px 26px; }
-  a.primary { color: #fff; background: var(--grad); }
-  a.secondary { color: var(--ink); border: 1.5px solid var(--line); }
-  a:focus-visible { outline: 3px solid #E83972; outline-offset: 3px; }
-  ol { list-style: none; counter-reset: s; padding: 0; margin: 36px 0 0; display: grid; gap: 14px; }
-  ol li { counter-increment: s; display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start; padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
-  ol li::before { content: counter(s); width: 32px; height: 32px; border-radius: 50%; background: var(--grad); color: #fff; font-weight: 700; display: grid; place-items: center; }
-  ol b { display: block; font-size: 18px; }
-  ol span { display: block; font-size: 16px; line-height: 1.45; color: var(--muted); margin-top: 3px; }
-  .proof { margin-top: 36px; padding: 20px; border-radius: 16px; border: 1px solid var(--line); }
-  .proof h2 { font-size: 20px; margin: 0 0 8px; letter-spacing: -.01em; }
-  .links { margin-top: 36px; display: grid; gap: 8px; font-size: 16px; }
-  .links a { color: var(--ink); }
-  footer { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; color: var(--muted); line-height: 1.5; }
-  footer a { color: var(--ink); }
+  .hero { padding-bottom: 64px; }
+  .hero-grid { display: grid; gap: 40px; padding-top: 28px; }
+  .hero h1 { font-weight: 700; font-size: clamp(40px, 9vw, 70px); line-height: .98; letter-spacing: -.045em; margin: 20px 0 18px; text-wrap: balance; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 14px; }
+  .stack { position: relative; width: min(74%, 360px); margin: 8px auto 0; aspect-ratio: 1080 / 1527; }
+  .stack img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 12px; border: 1px solid rgba(248,245,230,.10); box-shadow: 0 34px 70px -24px rgba(0,0,0,.75); }
+  .stack img:nth-child(1) { transform: translate(-16%, 5%) rotate(-8deg) scale(.88); opacity: .55; }
+  .stack img:nth-child(2) { transform: translate(16%, 4%) rotate(7deg) scale(.88); opacity: .7; }
+  .stack .badge { position: absolute; right: -6%; bottom: 7%; padding: 10px 14px; border-radius: 14px; background: var(--paper); color: var(--ink); font: 700 13px/1.25 var(--mono); box-shadow: 0 18px 40px -16px rgba(0,0,0,.6); transform: rotate(3deg); }
+  .stack .badge b { display: block; font: 700 22px/1 var(--sans); letter-spacing: -.02em; margin-top: 4px; }
+
+  section.block { padding: 64px 0; }
+  .block h2 { font-weight: 700; font-size: clamp(32px, 6.4vw, 52px); line-height: 1.02; letter-spacing: -.04em; margin: 16px 0 14px; text-wrap: balance; }
+  .label { font: 700 12px/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+  .quotes { display: grid; gap: 14px; margin-top: 30px; }
+  .quote { margin: 0; padding: 22px; border-radius: 20px; background: var(--chip); border: 1px solid var(--line); }
+  .quote blockquote { margin: 12px 0 16px; font-size: clamp(24px, 4.6vw, 32px); line-height: 1.15; letter-spacing: -.025em; font-weight: 600; }
+  .quote mark { background: linear-gradient(transparent 58%, rgba(232,57,114,.32) 58%); color: inherit; padding: 0 2px; }
+  .quote .shot { background: #fff; border-radius: 10px; border: 1px solid rgba(18,16,24,.08); overflow: hidden; }
+  .quote .shot img { display: block; width: 100%; height: auto; }
+  .quote .shot.narrow { max-width: 260px; }
+  .quote figcaption { font: 500 12px/1.4 var(--mono); color: var(--muted); margin-top: 10px; }
+
+  .scores { margin-top: 18px; padding: 26px 22px; border-radius: 22px; background: var(--ink); color: var(--paper); --muted: var(--on-ink-2); border: 1px solid rgba(248,245,230,.08); }
+  .scores h3 { margin: 0; font-size: 22px; letter-spacing: -.02em; }
+  .srow { display: grid; grid-template-columns: 48px 1fr auto; gap: 14px; align-items: center; margin-top: 20px; }
+  .srow .k { font: 700 13px/1 var(--mono); letter-spacing: .12em; color: var(--muted); }
+  .track { position: relative; height: 14px; border-radius: 99px; background: rgba(248,245,230,.08); overflow: hidden; }
+  .track i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 99px; }
+  .track .was { width: var(--from); background: rgba(248,245,230,.28); }
+  .track .now { width: var(--from); background: var(--grad); transition: width 1.4s cubic-bezier(.2,.8,.2,1) .2s; }
+  .scores.on .track .now { width: var(--to); }
+  .srow .v { font: 700 15px/1 var(--mono); color: var(--muted); white-space: nowrap; }
+  .srow .v b { font: 700 30px/1 var(--sans); letter-spacing: -.03em; color: var(--paper); margin-left: 6px; }
+  .scores p { margin: 20px 0 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
+
+  .stores { display: grid; gap: 14px; margin-top: 30px; }
+  .store { display: grid; grid-template-columns: 112px 1fr auto; gap: 16px; align-items: center; padding: 14px; border-radius: 18px; background: var(--chip); border: 1px solid var(--line); }
+  .store img { width: 112px; height: 72px; object-fit: cover; object-position: top left; border-radius: 10px; border: 1px solid var(--line); display: block; }
+  .store h3 { margin: 0; font-size: 19px; letter-spacing: -.02em; }
+  .store p { margin: 4px 0 0; font-size: 15px; line-height: 1.4; color: var(--muted); }
+  .store .n { text-align: right; font: 700 32px/1 var(--sans); letter-spacing: -.03em; }
+  .store .n span { display: block; font: 700 11px/1 var(--mono); letter-spacing: .12em; color: var(--muted); margin-top: 6px; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+  .facts div { padding: 16px 14px; border-radius: 16px; border: 1.5px solid transparent; background: linear-gradient(var(--chip), var(--chip)) padding-box, var(--grad) border-box; }
+  .facts b { display: block; font-size: 26px; letter-spacing: -.03em; }
+  .facts span { display: block; font-size: 14px; line-height: 1.35; color: var(--muted); margin-top: 6px; }
+
+  .steps { list-style: none; padding: 0; margin: 30px 0 0; display: grid; gap: 0; counter-reset: s; }
+  .steps li { counter-increment: s; position: relative; display: grid; grid-template-columns: 44px 1fr; gap: 16px; padding-bottom: 26px; }
+  .steps li::before { content: counter(s); width: 44px; height: 44px; border-radius: 50%; background: var(--grad); color: #fff; font: 700 18px/44px var(--sans); text-align: center; position: relative; z-index: 1; }
+  .steps li:not(:last-child)::after { content: ""; position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: var(--line); }
+  .steps b { display: block; font-size: 20px; letter-spacing: -.015em; margin-top: 9px; }
+  .steps span { display: block; font-size: 16px; line-height: 1.45; color: var(--muted); margin-top: 4px; }
+  .steps a { color: var(--fg); }
+  .term { margin-top: 6px; border-radius: 16px; overflow: hidden; background: #0B0A0F; border: 1px solid rgba(248,245,230,.10); }
+  .term .bar { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-bottom: 1px solid rgba(248,245,230,.08); font: 500 12px/1 var(--mono); color: var(--on-ink-2); }
+  .term .bar i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .term .bar .copy { margin-left: auto; font: 700 12px/1 var(--mono); color: var(--paper); background: rgba(248,245,230,.08); border: 1px solid rgba(248,245,230,.16); border-radius: 999px; padding: 8px 12px; cursor: pointer; }
+  .term pre { margin: 0; padding: 16px; font: 500 13.5px/1.7 var(--mono); color: var(--paper); white-space: pre-wrap; word-break: break-word; }
+  .term .ph { color: #F2A27C; }
+
+  .help { display: grid; gap: 24px; padding: 26px 22px; border-radius: 24px; background: var(--chip); border: 1px solid var(--line); }
+  .help-head { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; }
+  .help-head .eyebrow { white-space: nowrap; }
+  .help-head img { width: 72px; height: 72px; border-radius: 50%; padding: 3px; background: var(--grad); flex: none; }
+  .help h2 { font-size: clamp(28px, 5.2vw, 40px); margin: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips span { font: 500 13px/1 var(--mono); padding: 9px 12px; border-radius: 999px; border: 1px dashed var(--line); color: var(--fg); }
+  .logos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .logos div { height: 56px; border-radius: 12px; background: #fff; display: grid; place-items: center; padding: 10px; border: 1px solid rgba(18,16,24,.08); }
+  .logos img { max-height: 26px; max-width: 88%; width: auto; display: block; }
+
+  @media (min-width: 900px) {
+    :root { --gutter: 32px; }
+    .hero { padding-bottom: 96px; }
+    .hero-grid { grid-template-columns: 1.15fr .85fr; align-items: center; gap: 56px; padding-top: 48px; }
+    .stack { width: 100%; max-width: 380px; margin: 0 auto; }
+    section.block { padding: 96px 0; }
+    .quotes { grid-template-columns: .8fr 1.2fr; }
+    .stores { grid-template-columns: 1fr 1fr; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .help { grid-template-columns: 1.1fr .9fr; padding: 40px; align-items: center; }
+    .logos { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 420px) {
+    .store { grid-template-columns: 84px 1fr auto; gap: 12px; }
+    .store img { width: 84px; height: 60px; }
+    .facts { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
+
+<header class="s-ink glow hero">
+  <div class="wrap">
+    <nav class="top" aria-label="Topo">
+      <div class="me"><img src="assets/fabio.jpg" alt="" width="44" height="44"><div><b>Fábio Will</b><span>Tecnologia, dados e IA</span></div></div>
+      <a class="top-link" href="https://github.com/FabioWill/time-de-seo-geo">GitHub ↗</a>
+    </nav>
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Guia grátis · 13 páginas</span>
+        <h1>O ChatGPT recomenda a sua loja <span class="gx">ou a do concorrente?</span></h1>
+        <p class="lead">Este guia transforma o <b>Claude</b> ou o <b>ChatGPT</b> num time de SEO e GEO: ele mede a página do seu produto, reescreve sem inventar nada e confere cada fato antes de você aprovar.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="pdf/Time%20de%20SEO%20e%20GEO%20no%20seu%20chat.pdf" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>
+            Baixar o guia grátis
+          </a>
+          <a class="btn btn-ghost" href="#como-usar">Como funciona</a>
+        </div>
+        <p class="meta">PDF · 1,7 MB · sem cadastro · testado em 4 lojas reais</p>
+      </div>
+      <div class="stack" aria-hidden="true">
+        <img src="assets/guia-p04.jpg" alt="" loading="eager">
+        <img src="assets/guia-p08.jpg" alt="" loading="eager">
+        <img src="assets/guia-p01.jpg" alt="" loading="eager">
+        <div class="badge">Stanley, depois<b>SEO 66 → 94</b></div>
+      </div>
+    </div>
+  </div>
+</header>
+
 <main>
-  <div class="bar"></div>
-  <div class="eyebrow">Guia grátis · SEO + GEO</div>
-  <h1>Time de SEO e GEO no seu chat</h1>
-  <p>Anexe este PDF e a página do seu produto no <b>Claude</b> ou no <b>ChatGPT</b>. O chat trabalha como três especialistas: mede a página, reescreve sem inventar nada e confere cada fato. Você aprova.</p>
-  <div class="cta">
-    <a class="btn primary" href="pdf/Time%20de%20SEO%20e%20GEO%20no%20seu%20chat.pdf" download>Baixar o guia (PDF)</a>
-    <a class="btn secondary" href="preparar.html">Preparar a página</a>
-  </div>
-  <p style="font-size:15px">PDF de 13 páginas, 1,7 MB. Não precisa instalar nada.</p>
+  <section class="s-paper block" id="prova">
+    <div class="wrap">
+      <span class="eyebrow">Caso real · loja oficial da Stanley</span>
+      <h2>A mesma página diz <span class="gx">28 horas</span> e 24 horas</h2>
+      <p class="lead">Quanto tempo a garrafa mantém quente? Quem lê a página passa batido. Um assistente de IA que precisa responder <b>não sabe qual número repetir</b>, e página que se contradiz perde a vez para quem é claro.</p>
+      <div class="quotes">
+        <figure class="quote">
+          <span class="label">No topo da página</span>
+          <blockquote>quente por <mark>28 horas</mark></blockquote>
+          <div class="shot narrow"><img src="assets/prova-28h.png" alt="Print do selo da página: 28 horas" width="360" height="150"></div>
+          <figcaption>print da página oficial, 09/11/2026</figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="label">Nos detalhes, mais abaixo</span>
+          <blockquote>bebidas quentes por até <mark>24 horas</mark></blockquote>
+          <div class="shot"><img src="assets/prova-24h.png" alt="Print do texto da página: bebidas quentes por até 24 horas" width="666" height="88"></div>
+          <figcaption>print da página oficial, 09/11/2026</figcaption>
+        </figure>
+      </div>
+      <div class="scores" id="scores">
+        <span class="label">Depois do time, na mesma página</span>
+        <div class="srow"><span class="k">SEO</span><div class="track" style="--from:66%;--to:94%"><i class="was"></i><i class="now"></i></div><span class="v">66 →<b>94</b></span></div>
+        <div class="srow"><span class="k">GEO</span><div class="track" style="--from:71%;--to:100%"><i class="was"></i><i class="now"></i></div><span class="v">71 →<b>100</b></span></div>
+        <p>Simulação educativa feita a partir da página pública; a página oficial não mudou. O time não escolheu entre 28 e 24 horas: deixou a pergunta para a marca. Nenhum dado foi inventado.</p>
+      </div>
+    </div>
+  </section>
 
-  <ol>
-    <li><div><b>Salve a página do produto</b><span>No Chrome: Cmd + S (Mac) ou Ctrl + S (Windows), "Página da Web, completa".</span></div></li>
-    <li><div><b>Passe pelo preparador</b><span>Ele deixa o arquivo umas dez vezes menor, no seu navegador. Nada é enviado.</span></div></li>
-    <li><div><b>Abra um chat novo e anexe o PDF e a página</b><span>No Claude ou no ChatGPT.</span></div></li>
-    <li><div><b>Cole a frase da página 8 do guia</b><span>Com a sua palavra-chave e os fatos do produto, ou "use só a página".</span></div></li>
-  </ol>
+  <section class="s-paper block" id="lojas" style="padding-top:0">
+    <div class="wrap">
+      <span class="eyebrow">Quatro lojas reais</span>
+      <h2>Quatro plataformas, <span class="gx">o mesmo padrão</span></h2>
+      <div class="stores">
+        <div class="store"><img src="casos/01-stanley/print-computador.jpg" alt="" loading="lazy"><div><h3>Stanley</h3><p>Shopify · 28 h e 24 h na mesma página</p></div><div class="n">66<span>SEO</span></div></div>
+        <div class="store"><img src="casos/02-fastshop/print-computador.jpg" alt="" loading="lazy"><div><h3>Fast Shop</h3><p>VTEX · ficha técnica num parágrafo só</p></div><div class="n">78<span>SEO</span></div></div>
+        <div class="store"><img src="casos/03-decathlon/print-computador.jpg" alt="" loading="lazy"><div><h3>Decathlon</h3><p>VTEX · nota visível, fora do schema</p></div><div class="n">84<span>SEO</span></div></div>
+        <div class="store"><img src="casos/04-kabum/print-computador.jpg" alt="" loading="lazy"><div><h3>KaBuM</h3><p>título de promoção, não do produto</p></div><div class="n">64<span>SEO</span></div></div>
+      </div>
+      <div class="facts">
+        <div><b>4 de 4</b><span>sem pergunta de comprador respondida na página</span></div>
+        <div><b>3 de 4</b><span>sem especificações em pares</span></div>
+        <div><b>4 de 4</b><span>sem frete declarado para o Google</span></div>
+      </div>
+      <p class="meta" style="margin-top:16px">Páginas lidas em 09/11/2026 com o mesmo conferidor. <a href="https://github.com/FabioWill/time-de-seo-geo/tree/main/casos" style="color:inherit">Ver os casos com prints ↗</a></p>
+    </div>
+  </section>
 
-  <div class="proof">
-    <h2>Testado em quatro lojas reais</h2>
-    <p>Stanley, Fast Shop, Decathlon e KaBuM. Na página oficial da Stanley, a reescrita do time (uma simulação, a página oficial não mudou) foi de 66 para 94 em SEO e de 71 para 100 em GEO, sem inventar nenhum dado.</p>
-  </div>
+  <section class="s-ink glow block" id="como-usar">
+    <div class="wrap split">
+      <div>
+        <span class="eyebrow">Como usar</span>
+        <h2>Quatro passos, <span class="gx">sem instalar nada</span></h2>
+        <ol class="steps">
+          <li><div><b>Salve a página do produto</b><span>No Chrome: Cmd + S (Mac) ou Ctrl + S (Windows), "Página da Web, completa".</span></div></li>
+          <li><div><b>Passe pelo preparador</b><span>O <a href="preparar.html">preparador</a> deixa o arquivo umas dez vezes menor, no seu navegador. Nada é enviado.</span></div></li>
+          <li><div><b>Abra um chat novo</b><span>No Claude ou no ChatGPT, e anexe o PDF e a página preparada.</span></div></li>
+          <li><div><b>Cole a frase abaixo</b><span>Com a sua palavra-chave e os fatos do produto, ou "use só a página".</span></div></li>
+        </ol>
+      </div>
+      <div>
+        <div class="term">
+          <div class="bar"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i>&nbsp;cole no chat<button class="copy" type="button" id="copy">Copiar</button></div>
+<pre id="frase">Siga as instruções do PDF "Time de SEO e GEO no seu chat".
+A página está no arquivo .html anexo.
+Palavra-chave: <span class="ph">[garrafa térmica stanley classic]</span>
+Endereço da página: <span class="ph">[https://www.sualoja.com.br/produto]</span>
+Nome da loja: <span class="ph">[Sua Loja]</span>
+Fatos do produto: <span class="ph">[cole aqui, anexe, ou "use só a página"]</span></pre>
+        </div>
+        <div class="cta">
+          <a class="btn btn-primary" href="pdf/Time%20de%20SEO%20e%20GEO%20no%20seu%20chat.pdf" download>Baixar o guia grátis</a>
+          <a class="btn btn-ghost" href="preparar.html">Abrir o preparador</a>
+        </div>
+        <p class="meta" id="copy-status" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
 
-  <div class="links">
-    <a href="https://github.com/FabioWill/time-de-seo-geo">Código, régua e pesquisa no GitHub</a>
-    <a href="https://github.com/FabioWill/time-de-seo-geo/tree/main/casos">Os quatro casos, com prints</a>
-  </div>
-
-  <footer>
-    <b style="color:var(--ink)">Fábio Will</b>, tecnologia, dados e IA. Tem uma loja ou um site e quer ajuda com SEO e GEO? Fale comigo pelo <a href="https://absoluto.ai/whats">WhatsApp</a> ou pelo <a href="https://absoluto.ai/contato">contato da Absoluto</a>.<br>
-    Textos e guia em CC BY 4.0, código em MIT. Marcas citadas pertencem aos donos.
-  </footer>
+  <section class="s-paper block" id="ajuda">
+    <div class="wrap">
+      <div class="help">
+        <div>
+          <div class="help-head"><img src="assets/fabio.jpg" alt="Fábio Will" width="72" height="72"><span class="eyebrow">Consultoria e mentoria</span></div>
+          <h2 style="margin-top:20px">Tem uma loja ou um site e quer ajuda com <span class="gx">SEO e GEO</span>?</h2>
+          <p class="lead" style="margin-top:14px">Faço o diagnóstico, monto o plano e acompanho a equipe. Além do conteúdo, olho a parte técnica que este guia não mede.</p>
+          <div class="chips" style="margin-top:18px"><span>Lighthouse e Core Web Vitals</span><span>Segurança do site</span><span>Robôs de IA e robots.txt</span></div>
+          <div class="cta" style="margin-bottom:0">
+            <a class="btn btn-primary" href="https://absoluto.ai/whats">Falar no WhatsApp</a>
+            <a class="btn btn-ghost" href="https://absoluto.ai/contato">absoluto.ai/contato</a>
+          </div>
+        </div>
+        <div>
+          <p class="label" style="margin:0 0 12px">Atendo lojas em</p>
+          <div class="logos">
+            <div><img src="assets/logos/shopify.svg" alt="Shopify"></div>
+            <div><img src="assets/logos/vtex.svg" alt="VTEX"></div>
+            <div><img src="assets/logos/nuvemshop.png" alt="Nuvemshop"></div>
+            <div><img src="assets/logos/lojaintegrada.svg" alt="Loja Integrada"></div>
+            <div><img src="assets/logos/woocommerce.svg" alt="WooCommerce"></div>
+            <div><img src="assets/logos/magento.svg" alt="Magento"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
+
+<footer class="s-ink">
+  <div class="wrap site-footer">
+    <div class="row"><a href="https://github.com/FabioWill/time-de-seo-geo">Código, régua e pesquisa no GitHub</a><a href="preparar.html">Preparador</a><a href="https://github.com/FabioWill/time-de-seo-geo/tree/main/casos">Casos com prints</a></div>
+    Textos e guia em CC BY 4.0, código em MIT. Marcas e páginas citadas pertencem aos donos; prints de páginas públicas, para estudo.
+  </div>
+</footer>
+
+<script>
+  // Copy the chat sentence as plain text (placeholders included) for people on the phone.
+  const status = document.getElementById('copy-status');
+  document.getElementById('copy').addEventListener('click', async () => {
+    const text = document.getElementById('frase').innerText;
+    try { await navigator.clipboard.writeText(text); status.textContent = 'Frase copiada. Troque o que está entre colchetes.'; }
+    catch { status.textContent = 'Não deu para copiar automaticamente: selecione o texto e copie.'; }
+  });
+  // Score bars fill from "before" to "after" once they are on screen.
+  const scores = document.getElementById('scores');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries, obs) => entries.forEach((e) => { if (e.isIntersecting) { scores.classList.add('on'); obs.disconnect(); } }), { threshold: .4 }).observe(scores);
+  } else scores.classList.add('on');
+</script>
 </body>
 </html>
