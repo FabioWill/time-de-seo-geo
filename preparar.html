@@ -15,6 +15,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23EF7843'/%3E%3Cstop offset='.5' stop-color='%23E83972'/%3E%3Cstop offset='1' stop-color='%23654193'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/site.css">
+<script src="assets/eventos.js" defer></script>
 <!--
   preparar.html
 
@@ -108,7 +109,7 @@
       <ol>
         <li>Baixe a página preparada.</li>
         <li>Abra um chat novo no <b>Claude</b> ou no <b>ChatGPT</b>.</li>
-        <li>Anexe a página preparada e o PDF <a href="pdf/Time%20de%20SEO%20e%20GEO%20no%20seu%20chat.pdf" download>"Time de SEO e GEO no seu chat"</a>.</li>
+        <li>Anexe a página preparada e o PDF <a href="pdf/Time%20de%20SEO%20e%20GEO%20no%20seu%20chat.pdf" download data-ev="baixar_pdf">"Time de SEO e GEO no seu chat"</a>.</li>
         <li>Cole a frase da <a href="./#como-usar">página 8 do guia</a> com a sua palavra-chave.</li>
       </ol>
     </div>
@@ -118,7 +119,7 @@
 <footer class="s-ink">
   <div class="wrap site-footer">
     <div class="row"><a href="./">Guia grátis</a><a href="https://github.com/FabioWill/time-de-seo-geo">Código no GitHub</a></div>
-    Código em MIT. O preparador mantém metadados, dados estruturados, títulos, texto, links e imagens; tira scripts, estilos e rastreadores.
+    Contamos visitas e cliques de forma anônima, sem cookies. Código em MIT. O preparador mantém metadados, dados estruturados, títulos, texto, links e imagens; tira scripts, estilos e rastreadores.
   </div>
 </footer>
 <script>
@@ -204,7 +205,7 @@
   function handle(file) {
     if (!file) return;
     baseName = file.name.replace(/\.html?$/i, '');
-    file.text().then(show);
+    file.text().then((h) => { show(h); window.ev && window.ev('preparar_arquivo'); });
   }
   const status = document.getElementById('status'), go = document.getElementById('go'), linkInput = document.getElementById('link');
   document.getElementById('bylink').addEventListener('submit', async (e) => {
@@ -220,11 +221,13 @@
       if (!data.ok) throw new Error(data.error || 'Não consegui ler essa página.');
       baseName = nameFromUrl(data.finalUrl || link);
       show(data.html, data.finalUrl || link);
+      window.ev && window.ev('preparar_link_ok');
       status.textContent = 'Pronto. Baixe a página preparada logo abaixo.';
     } catch (err) {
       status.className = 'status err';
       status.textContent = err.message && err.message !== 'Failed to fetch' ? err.message : 'Não consegui ler essa página agora. Salve a página no navegador e arraste o arquivo abaixo.';
       drop.classList.add('attn');
+      window.ev && window.ev('preparar_link_erro');
     } finally { go.disabled = false; }
   });
   const drop = document.getElementById('drop'), input = document.getElementById('file');
@@ -235,6 +238,7 @@
   drop.addEventListener('drop', (e) => handle(e.dataTransfer.files[0]));
   drop.addEventListener('click', (e) => { if (e.target !== input) { e.preventDefault(); input.click(); } });
   document.getElementById('save').addEventListener('click', () => {
+    window.ev && window.ev('baixar_preparada');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([cleaned], { type: 'text/html' }));
     a.download = `${baseName}-preparada.html`;
