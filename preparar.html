@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preparar a página · Time de SEO e GEO</title>
+<meta name="description" content="Deixa o arquivo salvo de uma página de produto pronto para anexar no Claude ou no ChatGPT: tira o código que não é conteúdo, sem enviar nada para servidor nenhum.">
+<!--
+  preparar.html
+
+  Purpose: shrinks a saved product page (often 0.5 to 3 MB of scripts and CSS) into a file a chat
+           can read (usually 60 to 110 KB), entirely in the browser: no upload, no server. Keeps
+           what the ruler reads: head metadata, JSON-LD, headings, text, links, image alt and src.
+  Exports: none (static page, published with GitHub Pages).
+  Shared:  index.html and the README (path 1) link here; so does the guide PDF (step 1).
+  Perf:    DOMParser on one file; a 3 MB page takes well under a second.
+-->
+<style>
+  :root { --ink: #121018; --paper: #F8F5E6; --muted: #67636F; --line: rgba(18,16,24,.14);
+          --grad: linear-gradient(95deg, #EF7843 0%, #EB5849 25%, #E83972 50%, #883F90 75%, #654193 100%); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ink: #F8F5E6; --paper: #121018; --muted: #C7C0CD; --line: rgba(248,245,230,.16); } }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--paper); color: var(--ink); }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 16px 64px; }
+  .bar { height: 6px; border-radius: 3px; background: var(--grad); width: 72px; }
+  h1 { font-size: clamp(30px, 6vw, 44px); line-height: 1.05; letter-spacing: -.03em; margin: 18px 0 12px; }
+  p { font-size: 18px; line-height: 1.5; color: var(--muted); margin: 0 0 12px; }
+  .drop { margin-top: 28px; border: 2px dashed var(--line); border-radius: 18px; padding: 40px 20px; text-align: center; cursor: pointer; }
+  .drop.over { border-color: #E83972; }
+  .drop b { display: block; font-size: 20px; color: var(--ink); }
+  .drop span { display: block; margin-top: 6px; font-size: 16px; color: var(--muted); }
+  input[type=file] { display: none; }
+  .out { margin-top: 24px; display: none; padding: 22px; border-radius: 16px; border: 1px solid var(--line); }
+  .out.show { display: block; }
+  .nums { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 16px; }
+  .nums div b { display: block; font-size: 32px; letter-spacing: -.02em; }
+  .nums div span { font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+  button { font: inherit; font-size: 18px; font-weight: 700; color: #fff; background: var(--grad); border: 0; border-radius: 999px; padding: 14px 26px; cursor: pointer; }
+  button:focus-visible, .drop:focus-visible { outline: 3px solid #E83972; outline-offset: 3px; }
+  .warn { margin-top: 14px; font-size: 16px; color: #B5352E; }
+  .small { margin-top: 28px; font-size: 15px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="bar"></div>
+  <h1>Preparar a página para o chat</h1>
+  <p>Página de loja salva no computador costuma ter de 0,5 a 3 MB, quase tudo código que não é conteúdo. Isso pode estourar o limite do chat. Aqui ela fica umas dez vezes menor e mantém tudo o que a régua lê.</p>
+  <p><b>Nada sai do seu computador:</b> a limpeza roda neste navegador.</p>
+  <label class="drop" id="drop" tabindex="0">
+    <b>Arraste aqui o arquivo .html da página</b>
+    <span>ou clique para escolher</span>
+    <input type="file" id="file" accept=".html,.htm,text/html">
+  </label>
+  <div class="out" id="out">
+    <div class="nums"><div><b id="before">0</b><span>antes</span></div><div><b id="after">0</b><span>depois</span></div><div><b id="ld">0</b><span>blocos JSON-LD mantidos</span></div></div>
+    <button id="save">Baixar página preparada</button>
+    <p class="warn" id="warn"></p>
+  </div>
+  <p class="small">Depois, anexe no chat o arquivo baixado e o PDF "Time de SEO e GEO no seu chat". Código aberto: os mesmos passos estão no repositório.</p>
+</main>
+<script>
+  // Attributes that carry meaning for the ruler; everything else (class soup, tracking data) goes.
+  const KEEP_ATTR = new Set(['href', 'src', 'alt', 'title', 'lang', 'name', 'content', 'property', 'rel', 'id', 'type', 'itemprop', 'itemtype', 'itemscope', 'datetime', 'data-nosnippet', 'charset']);
+  const KEEP_CLASS = /descri|product|produto|spec|detail|detalhe|price|preco|preço|stock|estoque|avail|review|rating|avalia|faq|pergunta/i;
+  let cleaned = '', baseName = 'pagina';
+
+  function prepare(html) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    doc.querySelectorAll('script:not([type="application/ld+json"]), style, noscript, template, svg, iframe, link:not([rel="canonical"])').forEach((n) => n.remove());
+    const walker = doc.createTreeWalker(doc, NodeFilter.SHOW_COMMENT);
+    const comments = [];
+    while (walker.nextNode()) comments.push(walker.currentNode);
+    comments.forEach((c) => c.remove());
+    doc.querySelectorAll('*').forEach((el) => {
+      [...el.attributes].forEach((a) => {
+        if (a.name === 'class') {
+          const kept = a.value.split(/\s+/).filter((c) => KEEP_CLASS.test(c));
+          kept.length ? el.setAttribute('class', kept.join(' ')) : el.removeAttribute('class');
+        } else if (!KEEP_ATTR.has(a.name)) {
+          el.removeAttribute(a.name);
+        } else if (a.name === 'src' && a.value.startsWith('data:')) {
+          el.setAttribute('src', '');
+        }
+      });
+    });
+    const out = '<!doctype html>\n' + doc.documentElement.outerHTML.replace(/\n\s*\n+/g, '\n');
+    return { out, ld: doc.querySelectorAll('script[type="application/ld+json"]').length };
+  }
+
+  const kb = (n) => (n >= 1048576 ? (n / 1048576).toFixed(1).replace('.', ',') + ' MB' : Math.round(n / 1024) + ' KB');
+  function handle(file) {
+    if (!file) return;
+    baseName = file.name.replace(/\.html?$/i, '');
+    file.text().then((html) => {
+      const { out, ld } = prepare(html);
+      cleaned = out;
+      document.getElementById('before').textContent = kb(new Blob([html]).size);
+      document.getElementById('after').textContent = kb(new Blob([out]).size);
+      document.getElementById('ld').textContent = ld;
+      document.getElementById('warn').textContent = /captcha|acesse sua conta|algo deu errado|access denied/i.test(out) && out.length < 20000
+        ? 'Parece uma tela de bloqueio ou de login, não a página do produto. Abra a página no navegador e salve de novo.' : '';
+      document.getElementById('out').classList.add('show');
+    });
+  }
+  const drop = document.getElementById('drop'), input = document.getElementById('file');
+  input.addEventListener('change', () => handle(input.files[0]));
+  drop.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); } });
+  ['dragenter', 'dragover'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', (e) => handle(e.dataTransfer.files[0]));
+  document.getElementById('save').addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([cleaned], { type: 'text/html' }));
+    a.download = `${baseName}-preparada.html`;
+    a.click();
+  });
+</script>
+</body>
+</html>

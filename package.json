@@ -1,0 +1,15 @@
+{
+  "name": "time-de-seo-geo",
+  "private": true,
+  "description": "Time de SEO e GEO no seu chat: régua, conferidor, casos reais e guia em PDF.",
+  "license": "MIT",
+  "scripts": {
+    "prepare": "husky",
+    "test": "python3 conferir/test_conferir.py"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "husky": "^9.1.7"
+  }
+}
