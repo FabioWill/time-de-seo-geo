@@ -3,20 +3,65 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Time de SEO e GEO no seu chat · guia grátis</title>
-<meta name="description" content="Guia grátis em PDF: o Claude ou o ChatGPT viram um time de SEO e GEO que mede a página do seu produto, reescreve sem inventar nada e confere cada fato. Testado em quatro lojas reais.">
+<title>Guia grátis de SEO e GEO para o Claude e o ChatGPT · Fábio Will</title>
+<meta name="description" content="Stanley tirou 66, KaBuM 64. Guia grátis em PDF que transforma o Claude ou o ChatGPT num time de SEO e GEO: mede a página do seu produto de 0 a 100, reescreve sem inventar nada e confere cada fato.">
+<link rel="canonical" href="https://fabiowill.github.io/time-de-seo-geo/">
+<meta name="author" content="Fábio Will">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Time de SEO e GEO no seu chat · guia grátis">
-<meta property="og:description" content="Anexe o PDF e a página do seu produto no Claude ou no ChatGPT. Testado em quatro lojas reais.">
-<meta property="og:image" content="https://fabiowill.github.io/time-de-seo-geo/og.png">
+<meta property="og:site_name" content="Fábio Will">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="28 horas ou 24? Nem a página da Stanley sabe.">
+<meta property="og:description" content="Guia grátis: o time de SEO e GEO que mede a página do seu produto, dentro do Claude ou do ChatGPT. Testado em quatro lojas reais.">
+<meta property="og:image" content="https://fabiowill.github.io/time-de-seo-geo/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="28 horas ou 24? Nem a página da Stanley sabe. Capa do guia grátis de SEO e GEO.">
 <meta property="og:url" content="https://fabiowill.github.io/time-de-seo-geo/">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="28 horas ou 24? Nem a página da Stanley sabe.">
+<meta name="twitter:description" content="Guia grátis de SEO e GEO para o Claude e o ChatGPT. Testado em quatro lojas reais.">
+<meta name="twitter:image" content="https://fabiowill.github.io/time-de-seo-geo/og.jpg">
 <meta name="theme-color" content="#121018">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23EF7843'/%3E%3Cstop offset='.5' stop-color='%23E83972'/%3E%3Cstop offset='1' stop-color='%23654193'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/site.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebPage",
+ "name": "Guia grátis: time de SEO e GEO no seu chat",
+ "url": "https://fabiowill.github.io/time-de-seo-geo/",
+ "inLanguage": "pt-BR",
+ "description": "Guia em PDF que transforma o Claude ou o ChatGPT num time de SEO e GEO: mede a página do produto de 0 a 100, reescreve sem inventar dados e confere cada fato. Testado em quatro lojas reais.",
+ "primaryImageOfPage": "https://fabiowill.github.io/time-de-seo-geo/og.jpg",
+ "author": {
+  "@type": "Person",
+  "name": "Fábio Will",
+  "jobTitle": "Tech lead e mentor",
+  "worksFor": {
+   "@type": "Organization",
+   "name": "Absoluto",
+   "url": "https://absoluto.ai"
+  }
+ },
+ "mainEntity": {
+  "@type": "DigitalDocument",
+  "name": "Time de SEO e GEO no seu chat",
+  "encodingFormat": "application/pdf",
+  "url": "https://fabiowill.github.io/time-de-seo-geo/pdf/Time%20de%20SEO%20e%20GEO%20no%20seu%20chat.pdf",
+  "numberOfPages": 13,
+  "inLanguage": "pt-BR",
+  "isAccessibleForFree": true,
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "datePublished": "2026-11-09",
+  "author": {
+   "@type": "Person",
+   "name": "Fábio Will"
+  }
+ }
+}
+</script>
 <!--
   index.html
 
@@ -26,12 +71,15 @@
   Exports: none (static page).
   Shared:  assets/site.css (with preparar.html); guide page images rendered from the post folder
            (guia/render.mjs); og.png from arte/post.html page o1; store prints from casos/.
-  Perf:    static; one small script (copy button and the score bars when they scroll into view).
+  Perf:    static; fonts self-hosted (Geist preloaded), images WebP at display size with width and
+           height set, the guide cover is the LCP image (fetchpriority high), the rest lazy; og.jpg
+           stays JPEG for link previewers. One small script (copy button, score bars).
 -->
 <style>
   .hero { padding-bottom: 64px; }
   .hero-grid { display: grid; gap: 40px; padding-top: 28px; }
-  .hero h1 { font-weight: 700; font-size: clamp(40px, 9vw, 70px); line-height: .98; letter-spacing: -.045em; margin: 20px 0 18px; text-wrap: balance; }
+  .hero h1 .gx { display: block; }
+  .hero h1 { font-weight: 700; font-size: clamp(38px, 8.6vw, 64px); line-height: .98; letter-spacing: -.045em; margin: 20px 0 18px; text-wrap: balance; }
   .cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 14px; }
   .stack { position: relative; width: min(74%, 360px); margin: 8px auto 0; aspect-ratio: 1080 / 1527; }
   .stack img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 12px; border: 1px solid rgba(248,245,230,.10); box-shadow: 0 34px 70px -24px rgba(0,0,0,.75); }
@@ -127,14 +175,14 @@
 <header class="s-ink glow hero">
   <div class="wrap">
     <nav class="top" aria-label="Topo">
-      <div class="me"><img src="assets/fabio.jpg" alt="" width="44" height="44"><div><b>Fábio Will</b><span>Tecnologia, dados e IA</span></div></div>
+      <div class="me"><img src="assets/fabio.webp" alt="" width="44" height="44"><div><b>Fábio Will</b><span>Tecnologia, dados e IA</span></div></div>
       <a class="top-link" href="https://github.com/FabioWill/time-de-seo-geo">GitHub ↗</a>
     </nav>
     <div class="hero-grid">
       <div>
         <span class="eyebrow">Guia grátis · 13 páginas</span>
-        <h1>O ChatGPT recomenda a sua loja <span class="gx">ou a do concorrente?</span></h1>
-        <p class="lead">Este guia transforma o <b>Claude</b> ou o <b>ChatGPT</b> num time de SEO e GEO: ele mede a página do seu produto, reescreve sem inventar nada e confere cada fato antes de você aprovar.</p>
+        <h1>Stanley tirou&nbsp;66. KaBuM,&nbsp;64. <span class="gx">Quanto tira a página da sua loja?</span></h1>
+        <p class="lead">Este guia grátis transforma o <b>Claude</b> ou o <b>ChatGPT</b> num time de SEO e GEO: mede a página do seu produto de 0 a 100, reescreve sem inventar nada e confere cada fato antes de você aprovar.</p>
         <div class="cta">
           <a class="btn btn-primary" href="pdf/Time%20de%20SEO%20e%20GEO%20no%20seu%20chat.pdf" download>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>
@@ -145,9 +193,9 @@
         <p class="meta">PDF · 1,7 MB · sem cadastro · testado em 4 lojas reais</p>
       </div>
       <div class="stack" aria-hidden="true">
-        <img src="assets/guia-p04.jpg" alt="" loading="eager">
-        <img src="assets/guia-p08.jpg" alt="" loading="eager">
-        <img src="assets/guia-p01.jpg" alt="" loading="eager">
+        <img src="assets/guia-p04.webp" alt="" width="760" height="1075" decoding="async">
+        <img src="assets/guia-p08.webp" alt="" width="760" height="1075" decoding="async">
+        <img src="assets/guia-p01.webp" alt="Capa do guia Time de SEO e GEO no seu chat" width="760" height="1075" fetchpriority="high">
         <div class="badge">Stanley, depois<b>SEO 66 → 94</b></div>
       </div>
     </div>
@@ -164,13 +212,13 @@
         <figure class="quote">
           <span class="label">No topo da página</span>
           <blockquote>quente por <mark>28 horas</mark></blockquote>
-          <div class="shot narrow"><img src="assets/prova-28h.png" alt="Print do selo da página: 28 horas" width="360" height="150"></div>
+          <div class="shot narrow"><img src="assets/prova-28h.webp" alt="Print do selo da página: 28 horas" width="360" height="150" loading="lazy" decoding="async"></div>
           <figcaption>print da página oficial, 09/11/2026</figcaption>
         </figure>
         <figure class="quote">
           <span class="label">Nos detalhes, mais abaixo</span>
           <blockquote>bebidas quentes por até <mark>24 horas</mark></blockquote>
-          <div class="shot"><img src="assets/prova-24h.png" alt="Print do texto da página: bebidas quentes por até 24 horas" width="666" height="88"></div>
+          <div class="shot"><img src="assets/prova-24h.webp" alt="Print do texto da página: bebidas quentes por até 24 horas" width="666" height="88" loading="lazy" decoding="async"></div>
           <figcaption>print da página oficial, 09/11/2026</figcaption>
         </figure>
       </div>
@@ -188,10 +236,10 @@
       <span class="eyebrow">Quatro lojas reais</span>
       <h2>Quatro plataformas, <span class="gx">o mesmo padrão</span></h2>
       <div class="stores">
-        <div class="store"><img src="casos/01-stanley/print-computador.jpg" alt="" loading="lazy"><div><h3>Stanley</h3><p>Shopify · 28 h e 24 h na mesma página</p></div><div class="n">66<span>SEO</span></div></div>
-        <div class="store"><img src="casos/02-fastshop/print-computador.jpg" alt="" loading="lazy"><div><h3>Fast Shop</h3><p>VTEX · ficha técnica num parágrafo só</p></div><div class="n">78<span>SEO</span></div></div>
-        <div class="store"><img src="casos/03-decathlon/print-computador.jpg" alt="" loading="lazy"><div><h3>Decathlon</h3><p>VTEX · nota visível, fora do schema</p></div><div class="n">84<span>SEO</span></div></div>
-        <div class="store"><img src="casos/04-kabum/print-computador.jpg" alt="" loading="lazy"><div><h3>KaBuM</h3><p>título de promoção, não do produto</p></div><div class="n">64<span>SEO</span></div></div>
+        <div class="store"><img src="assets/lojas/stanley.webp" alt="" width="240" height="150" loading="lazy" decoding="async"><div><h3>Stanley</h3><p>Shopify · 28 h e 24 h na mesma página</p></div><div class="n">66<span>SEO</span></div></div>
+        <div class="store"><img src="assets/lojas/fastshop.webp" alt="" width="240" height="150" loading="lazy" decoding="async"><div><h3>Fast Shop</h3><p>VTEX · ficha técnica num parágrafo só</p></div><div class="n">78<span>SEO</span></div></div>
+        <div class="store"><img src="assets/lojas/decathlon.webp" alt="" width="240" height="150" loading="lazy" decoding="async"><div><h3>Decathlon</h3><p>VTEX · nota visível, fora do schema</p></div><div class="n">84<span>SEO</span></div></div>
+        <div class="store"><img src="assets/lojas/kabum.webp" alt="" width="240" height="150" loading="lazy" decoding="async"><div><h3>KaBuM</h3><p>título de promoção, não do produto</p></div><div class="n">64<span>SEO</span></div></div>
       </div>
       <div class="facts">
         <div><b>4 de 4</b><span>sem pergunta de comprador respondida na página</span></div>
@@ -237,7 +285,7 @@ Fatos do produto: <span class="ph">[cole aqui, anexe, ou "use só a página"]</s
     <div class="wrap">
       <div class="help">
         <div>
-          <div class="help-head"><img src="assets/fabio.jpg" alt="Fábio Will" width="72" height="72"><span class="eyebrow">Consultoria e mentoria</span></div>
+          <div class="help-head"><img src="assets/fabio.webp" alt="Fábio Will" width="72" height="72" loading="lazy" decoding="async"><span class="eyebrow">Consultoria e mentoria</span></div>
           <h2 style="margin-top:20px">Tem uma loja ou um site e quer ajuda com <span class="gx">SEO e GEO</span>?</h2>
           <p class="lead" style="margin-top:14px">Faço o diagnóstico, monto o plano e acompanho a equipe. Além do conteúdo, olho a parte técnica que este guia não mede.</p>
           <div class="chips" style="margin-top:18px"><span>Lighthouse e Core Web Vitals</span><span>Segurança do site</span><span>Robôs de IA e robots.txt</span></div>
@@ -251,7 +299,7 @@ Fatos do produto: <span class="ph">[cole aqui, anexe, ou "use só a página"]</s
           <div class="logos">
             <div><img src="assets/logos/shopify.svg" alt="Shopify"></div>
             <div><img src="assets/logos/vtex.svg" alt="VTEX"></div>
-            <div><img src="assets/logos/nuvemshop.png" alt="Nuvemshop"></div>
+            <div><img src="assets/logos/nuvemshop.webp" alt="Nuvemshop" loading="lazy"></div>
             <div><img src="assets/logos/lojaintegrada.svg" alt="Loja Integrada"></div>
             <div><img src="assets/logos/woocommerce.svg" alt="WooCommerce"></div>
             <div><img src="assets/logos/magento.svg" alt="Magento"></div>

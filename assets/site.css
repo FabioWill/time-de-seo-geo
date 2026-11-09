@@ -8,8 +8,11 @@
  * Exports: tokens (:root), surfaces (.s-ink, .s-paper), .wrap, .top, .eyebrow, .gx, .lead,
  *          .btn (.btn-primary, .btn-ghost), .meta, .site-footer.
  * Shared:  index.html and preparar.html; page-specific rules stay in each page's <style>.
- * Perf:    one small file, no framework; fonts from Google Fonts with display=swap.
+ * Perf:    one small file, no framework; Geist and JetBrains Mono self-hosted (Latin subset,
+ *          variable weight, OFL licenses next to them), font-display: swap.
  */
+@font-face { font-family: 'Geist'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('fonts/geist-latin.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500 700; font-display: swap; src: url('fonts/jetbrains-mono-latin.woff2') format('woff2'); }
 :root {
   --ink: #121018; --ink-2: #1B1822; --paper: #F8F5E6; --card: #FFFDF7;
   --t2: #45424D; --t3: #67636F; --on-ink-2: #C7C0CD; --rose: #E83972;
