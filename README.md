@@ -35,11 +35,12 @@ dos dois caminhos.
 
 ## Caminho 1: no seu chat (5 minutos)
 
-1. **Salve a página do produto.** No Chrome, aperte `Cmd + S` (Mac) ou `Ctrl + S` (Windows) e
-   escolha "Página da Web, completa".
-2. **Prepare o arquivo.** Abra o [preparador](https://fabiowill.github.io/time-de-seo-geo/preparar.html)
-   e arraste o `.html` salvo. Página de loja costuma ter de 0,5 a 3 MB de código; preparada, fica
-   umas dez vezes menor e cabe no chat. Testado nas lojas reais: a nota não muda.
+1. **Copie o link da página do produto.**
+2. **Cole no [preparador](https://fabiowill.github.io/time-de-seo-geo/preparar.html)** e baixe o
+   arquivo. Ele lê a página como os robôs de IA leem (sem rodar JavaScript) e devolve um arquivo
+   umas dez vezes menor, que cabe no chat. Se a loja bloquear a leitura pelo link, salve a página
+   no navegador (`Cmd + S` no Mac, `Ctrl + S` no Windows) e arraste o arquivo no mesmo preparador.
+   Testado nas lojas reais: a nota não muda.
 3. **Abra um chat novo** no Claude ou no ChatGPT e anexe o PDF e a página preparada.
 4. **Cole a frase** da página 8 do PDF, com a sua palavra-chave e os fatos do produto (ou "use só
    a página").
